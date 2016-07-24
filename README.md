@@ -20,9 +20,8 @@ Com os containers em execução `docker-compose up`, execute o seguinte comando 
 
     $ docker-compose scale rest_app=2
 
-Sim! Sim! Sim! Podemos escalar a aplicação!
-
-**PS:** Caso você não escale duas máquinas para a rest_app, pode haver uma perca no desempenho, já que o ngnix está configurado para rodar com duas máquinas. Caso uma não exista ou esteja offline ele vai redirecionar a requisição para a máquina que estiver funcionando.
+Sim! Sim! Sim! Podemos escalar a aplicação! O HAPROXY detecta automaticamente a
+quantidade de máquinas de aplicação e coloca no balanceador <3
 
 ## E agora? Como eu faço pra ver isso no navegador?
 
