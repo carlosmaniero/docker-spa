@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -82,6 +83,9 @@ DATABASES = {
         "PASSWORD": os.environ.get('POSTGRES_PASSWORD'),
         "PORT": os.environ.get('POSTGRES_PORT'),
         "USER": os.environ.get('POSTGRES_USER'),
+        'TEST': {
+            'NAME': 'db.sqlite3',
+        },
         "CONN_MAX_AGE": 60
     }
 }
@@ -124,3 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+if 'test' in sys.argv or 'test_coverage' in sys.argv:
+    DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
