@@ -1,0 +1,22 @@
+nginx:
+    build: ./nginx
+    ports:
+        - "80:80"
+    links:
+        - rest_app
+    volumes:
+      - ./front_end:/opt/app
+rest_app:
+    build: ./rest_app
+    ports:
+        - "8080:8080"
+    links:
+        - postgres_host
+    env_file:
+      - ./docker-base.env
+postgres_host:
+  image: postgres:9.4
+  ports:
+    - "5433:5432"
+  env_file:
+    - ./docker-base.env
