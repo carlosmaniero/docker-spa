@@ -3,18 +3,31 @@ nginx:
     ports:
         - "80:80"
     links:
-        - rest_app
+        - load_balencer
     volumes:
       - ./front_end:/opt/app
+
 rest_app:
     build: ./rest_app
     links:
         - postgres_host
     env_file:
       - ./docker-base.env
+    ports:
+      - 8080
+
 postgres_host:
   image: postgres:9.4
   ports:
     - "5433:5432"
   env_file:
     - ./docker-base.env
+
+load_balencer:
+    image: dockercloud/haproxy
+    ports:
+      - 8081:80
+    links:
+      - rest_app
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
