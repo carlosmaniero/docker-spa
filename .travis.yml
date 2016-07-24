@@ -12,5 +12,5 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 script:
-  - /usr/local/bin/docker-compose build rest_app
+  - docker-compose build rest_app
   - docker run dockerspa_rest_app python3 manage.py test
