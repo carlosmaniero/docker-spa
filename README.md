@@ -1,5 +1,7 @@
 # Docker SPA
 
+![build](https://travis-ci.org/carlosmaniero/docker-spa.svg?branch=master)
+
 Exemplo simples de utilização de docker com SPA (Single Page Application).
 
 ## Rodando
