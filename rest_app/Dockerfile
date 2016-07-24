@@ -18,7 +18,8 @@ RUN ln -s /opt/Python-3.5.0/Python /usr/bin/python3
 
 # Install Node.js and other dependencies
 RUN apt-get install -y libpq-dev
-ADD https://bootstrap.pypa.io/get-pip.py .
+ADD https://bootstrap.pypa.io/get-pip.py /opt/
+WORKDIR /opt/
 RUN python3 get-pip.py
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
