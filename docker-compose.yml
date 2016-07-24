@@ -8,8 +8,6 @@ nginx:
       - ./front_end:/opt/app
 rest_app:
     build: ./rest_app
-    ports:
-        - "8080:8080"
     links:
         - postgres_host
     env_file:
