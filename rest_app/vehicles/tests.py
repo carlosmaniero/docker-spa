@@ -63,7 +63,7 @@ class ManufacturerTest(APITestCase):
             '{}{}/'.format(self.api_base, fiat.pk),
             format='json'
         )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         fiat = Manufacturer.objects.filter(name='Fiat')
 
         self.assertEqual(fiat.count(), 0)
