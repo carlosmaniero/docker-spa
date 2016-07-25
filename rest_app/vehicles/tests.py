@@ -1,6 +1,6 @@
 from rest_framework.test import APITestCase
 from rest_framework import status
-from vehicles.models import Manufacturer
+from vehicles.models import Manufacturer, Vehicle
 
 
 class ManufacturerTest(APITestCase):
@@ -67,3 +67,8 @@ class ManufacturerTest(APITestCase):
         fiat = Manufacturer.objects.filter(name='Fiat')
 
         self.assertEqual(fiat.count(), 0)
+
+
+
+class VehicleTest(APITestCase):
+    pass

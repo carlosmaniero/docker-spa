@@ -11,6 +11,7 @@ rest_app:
     build: ./rest_app
     links:
         - postgres_host
+        - redis_host
     env_file:
       - ./docker-base.env
     ports:
@@ -18,12 +19,24 @@ rest_app:
     volumes:
       - ./rest_app:/opt/app
 
+worker:
+    build: ./rest_app/
+    dockerfile: Dockerfile-worker
+    links:
+        - rest_app
+        - redis_host
+
 postgres_host:
   image: postgres:9.4
   ports:
     - "5433:5432"
   env_file:
     - ./docker-base.env
+  volumes:
+    - ./rest_app:/opt/app
+
+redis_host:
+    build: ./redis
 
 load_balencer:
     image: dockercloud/haproxy
