@@ -1,4 +1,6 @@
 import requests
+import time
+from django.conf import settings
 from django.test import TestCase
 from vehicles.models import Manufacturer, Vehicle
 from vehicles.serializers import EsVehicleSerializer
@@ -7,6 +9,16 @@ from indexer import es_api
 
 class TestEsAPI(TestCase):
     def setUp(self):
+        # Wait for elasticsearch
+        for i in range(10):
+            try:
+                response = requests.get(settings.ELASTICSEARCH_HOST)
+            except Exception as e:
+                time.sleep(2)
+            else:
+                if response.status_code == 200:
+                    break
+
         # Destroy any data after start application
         requests.delete(es_api.VEHICLE_BASE_URL)
         self.manufacturer = Manufacturer.objects.create(name='Fiat')
