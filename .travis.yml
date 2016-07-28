@@ -16,5 +16,7 @@ before_install:
 script:
   - docker-compose build rest_app
   - docker-compose build elasticsearch_test
+  - docker-compose build postgres_host
+  - docker-compose build redis_host
   - docker-compose stop
   - docker-compose run rest_app python3 manage.py test --noinput
