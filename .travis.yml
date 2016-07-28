@@ -16,4 +16,4 @@ before_install:
 
 script:
   - docker-compose build rest_app
-  - docker run dockerspa_rest_app python3 manage.py test --noinput
+  - docker run dockerspa_rest_app python3 manage.py test --noinput --env ELASTICSEARCH_HOST_TEST=${ELASTICSEARCH_HOST_TEST}
