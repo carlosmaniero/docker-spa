@@ -21,6 +21,7 @@ from vehicles import views
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
 router.register(r'manufacturer', views.ManufacturerViewSet)
+router.register(r'vehicles', views.VehicleViewSet)
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),

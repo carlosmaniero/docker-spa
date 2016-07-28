@@ -2,9 +2,11 @@ sudo: required
 
 services:
   - docker
+  - elasticsearch
 
 env:
   DOCKER_COMPOSE_VERSION: 1.4.1
+  ELASTICSEARCH_HOST_TEST: http://localhost:9200
 
 before_install:
   - sudo rm /usr/local/bin/docker-compose

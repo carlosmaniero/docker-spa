@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 
 class IndexModel(models.Model):
@@ -15,6 +16,11 @@ class IndexModel(models.Model):
         verbose_name='Data de Atualização',
         null=True, blank=True
     )
+
+    def update_index_time(self, commit=True):
+        self.indexed_at = datetime.now()
+        if commit:
+            self.save()
 
     class Meta:
         abstract = True

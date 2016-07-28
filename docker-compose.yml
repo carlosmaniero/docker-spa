@@ -12,6 +12,7 @@ rest_app:
     links:
         - postgres_host
         - redis_host
+        - elasticsearch_test
     env_file:
       - ./docker-base.env
     ports:
@@ -23,13 +24,16 @@ worker:
     build: ./rest_app/
     dockerfile: Dockerfile-worker
     links:
-        - rest_app
+        - postgres_host
         - redis_host
+        - elasticsearch
+    env_file:
+      - ./docker-base.env
 
 postgres_host:
   image: postgres:9.4
   ports:
-    - "5433:5432"
+    - "5432:5432"
   env_file:
     - ./docker-base.env
   volumes:
@@ -46,3 +50,13 @@ load_balencer:
       - rest_app
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+
+elasticsearch:
+    image: elasticsearch
+    ports:
+        - 9200:9200
+
+elasticsearch_test:
+    image: elasticsearch
+    ports:
+        - 9222:9200

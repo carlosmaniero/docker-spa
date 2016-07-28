@@ -28,4 +28,4 @@ ADD . .
 RUN pip3 install -r requirements.txt
 
 # Run the application
-CMD ["python3", "./manage.py", "celeryd"]
+CMD ["celery", "-A", "rest_app", "worker", "-B", "-l", "info"]
