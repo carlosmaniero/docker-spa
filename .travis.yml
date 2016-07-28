@@ -14,4 +14,7 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 script:
+  - docker-compose build rest_app
+  - docker-compose build elasticsearch_test
+  - docker-compose stop
   - docker-compose run rest_app python3 manage.py test --noinput
