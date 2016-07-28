@@ -1,13 +1,12 @@
 sudo: required
 
-
 services:
   - docker
   - elasticsearch
 
 env:
   DOCKER_COMPOSE_VERSION: 1.4.1
-  ELASTICSEARCH_HOST_TEST: http://localhost:9200
+  ELASTICSEARCH_HOST_TEST: http://127.0.0.1:9200
 
 before_install:
   - sudo rm /usr/local/bin/docker-compose
@@ -17,4 +16,4 @@ before_install:
 
 script:
   - docker-compose build rest_app
-  - docker run dockerspa_rest_app python3 manage.py test --noinput --env ELASTICSEARCH_HOST_TEST=${ELASTICSEARCH_HOST_TEST}
+  - docker run dockerspa_rest_app --env ELASTICSEARCH_HOST_TEST=${ELASTICSEARCH_HOST_TEST} python3 manage.py test --noinput
