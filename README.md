@@ -28,3 +28,254 @@ quantidade de máquinas de aplicação e coloca no balanceador <3
 Só acessar seu [http://localhost/](http://localhost/).
 
 ![Magic](http://www.reactiongifs.com/r/mgc.gif)
+
+
+# Testes
+
+Para executar os testes utilize o seguinte comando:
+
+    docker-compose run rest_app coverage run --source='.' manage.py test
+
+Relatório:
+
+    docker-compose run rest_app coverage report     # Terminal
+    docker-compose run rest_app coverage html       # Em HTML
+
+O relatório em html é gerado em `rest_app/htmlcov`.
+
+
+# API Rest
+
+## Montadora
+
+### Criando
+```sh
+curl -XPOST -H "Content-type: application/json" -d '{"name": "Volkswagen"}' 'http://localhost/api/manufacturers/'
+```
+
+Retorno: 201
+
+```json
+{"id":3,"name":"Volkswagen"}
+```
+
+### Editando
+```sh
+curl -XPUT -H "Content-type: application/json" -d '{"name": "VW"}' 'http://localhost/api/manufacturers/3/'
+```
+
+Retorno: 200
+
+```json
+{"id":3,"name":"VW"}
+```
+
+
+### Obter
+```sh
+curl http://localhost/api/manufacturers/3/
+```
+
+Retorno: 200
+
+```json
+{"id":3,"name":"VW"}
+```
+
+### Listando
+```sh
+curl http://localhost/api/manufacturers/
+```
+
+Retorno: 201
+
+```json
+[
+    {"id":1,"name":"GM"},
+    {"id":2,"name":"Fiat"},
+    {"id":3,"name":"VW"}
+]
+```
+
+### Removendo
+```sh
+curl -XDELETE 'http://localhost/api/manufacturer/3/'
+```
+
+Retorno: 204
+
+
+## Veículos
+
+### Campos:
+Campo           | Descrição
+--------------- | -------------
+manufacturer    | id da montadora
+model_name      | Modelo do veículo
+color           | Cor do veículo (azul, preto, prata, vermelho, verde, outro)
+category        | Categoria do veículo (carro, moto)
+engine          | Motor do veículo
+kms             | Kilometragem
+
+### Criando
+```sh
+curl -XPOST -H "Content-type: application/json" -d '{"manufacturer":4,"model_name":"Fusca","color":"azul","category":"carro","kms":0,"engine":"1000"}' 'http://localhost/api/vehicles/'
+```
+
+Retorno: 201
+
+```json
+{
+  "id":4,
+  "manufacturer":4,
+  "model_name":"Fusca",
+  "color":"azul",
+  "category":"carro",
+  "kms":0,
+  "engine":"1000"
+}
+```
+
+### Atualizando
+```sh
+curl -XPUT -H "Content-type: application/json" -d '{"manufacturer":4,"model_name":"Brasilia","color":"azul","category":"carro","kms":0,"engine":"1000"}' 'http://localhost/api/vehicles/4/'
+```
+
+Retorno: 200
+
+```json
+{
+  "id":4,
+  "manufacturer":4,
+  "model_name":"Brasilia",
+  "color":"azul",
+  "category":"carro",
+  "kms":0,
+  "engine":"1000"
+}
+```
+
+### Obter
+```sh
+curl http://localhost/api/vehicles/4/
+```
+
+Retorno: 200
+
+```json
+{
+  "id":4,
+  "manufacturer":4,
+  "model_name":"Brasilia",
+  "color":"azul",
+  "category":"carro",
+  "kms":0,
+  "engine":"1000"
+}
+```
+
+### Listando
+```sh
+curl http://localhost/api/vehicles/
+```
+
+Retorno: 200
+
+```json
+[
+    {
+      "id":3,
+      "manufacturer":2,
+      "model_name":"Palio",
+      "color":"azul",
+      "category":"carro",
+      "kms":0,
+      "engine":"1000"
+    },
+    {
+      "id":2,
+      "manufacturer":2,
+      "model_name":"Uno",
+      "color":"prata",
+      "category":"carro",
+      "kms":0,
+      "engine":"1.0"
+    },
+    {
+      "id":1,
+      "manufacturer":1,
+      "model_name":"Vectra",
+      "color":"prata",
+      "category":"carro",
+      "kms":0,
+      "engine":"V8"
+    },
+    {
+      "id":4,
+      "manufacturer":4,
+      "model_name":"Brasilia",
+      "color":"azul",
+      "category":"carro",
+      "kms":0,
+      "engine":"1000"
+    }
+]
+```
+
+### Filtros
+Recebe os possíveis filtros de veículos indexados na aplicação.
+
+```sh
+curl http://localhost/api/index/filters/
+```
+
+Retorno: 200
+
+```json
+{
+    "color":[
+      {
+         "key":"azul",
+         "doc_count":2
+      },
+      {
+         "key":"prata",
+         "doc_count":2
+      }
+    ],
+    "manufacturer":[
+      {
+         "key":"fiat",
+         "doc_count":2
+      },
+      {
+         "key":"gm",
+         "doc_count":1
+      },
+      {
+         "key":"volkswagen",
+         "doc_count":1
+      }
+    ],
+    "category":[
+      {
+         "key":"carro",
+         "doc_count":4
+      }
+    ],
+    "motor":[
+      {
+         "key":"fiat",
+         "doc_count":2
+      },
+      {
+         "key":"gm",
+         "doc_count":1
+      },
+      {
+         "key":"volkswagen",
+         "doc_count":1
+      }
+    ]
+}
+```

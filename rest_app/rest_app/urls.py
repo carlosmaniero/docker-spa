@@ -21,7 +21,7 @@ from indexer import views as index_views
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
-router.register(r'manufacturer', vehicles_views.ManufacturerViewSet)
+router.register(r'manufacturers', vehicles_views.ManufacturerViewSet)
 router.register(r'vehicles', vehicles_views.VehicleViewSet)
 
 urlpatterns = [

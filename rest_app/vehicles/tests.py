@@ -6,7 +6,7 @@ from vehicles.models import Manufacturer, Vehicle
 class ManufacturerTest(APITestCase):
     def setUp(self):
         Manufacturer.objects.all().delete()
-        self.api_base = '/api/manufacturer/'
+        self.api_base = '/api/manufacturers/'
 
     def test_empty_list(self):
         response = self.client.get(self.api_base, format='json')
@@ -161,7 +161,7 @@ class VehicleTest(APITestCase):
         )
 
     def test_post(self):
-        response = self.client.post('/api/manufacturer/', data={
+        response = self.client.post('/api/manufacturers/', data={
             'name': 'Fiat'
         })
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)

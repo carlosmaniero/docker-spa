@@ -7,7 +7,7 @@ VEHICLE_COLORS = (
     ('preto', 'Preto'),
     ('prata', 'Prata'),
     ('vermelho', 'Vermelho'),
-    ('Verde', 'Verde'),
+    ('verde', 'Verde'),
     ('outro', 'Outro')
 )
 
