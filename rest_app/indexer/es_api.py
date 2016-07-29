@@ -21,6 +21,11 @@ class ESIndexException(BaseException):
             }
 
 
+class ESConnectionProblem(BaseException):
+    def __init__(self, message):
+        self.message = message
+
+
 def get_vehicle_url(vehicle_id):
     ''' Get vehicle es-url '''
     return '{}{}'.format(VEHICLE_URL, vehicle_id)
@@ -33,7 +38,7 @@ def get_vehicle(vehicle_id):
             get_vehicle_url(vehicle_id),
         )
     except Exception as e:
-        return ESIndexException(bytes(e))
+        raise ESConnectionProblem(str(e))
 
     if response.status_code not in (200, 201):
         raise ESIndexException(response.content)
@@ -49,7 +54,7 @@ def index_vehicle(vehicle_data):
             data=json.dumps(vehicle_data)
         )
     except Exception as e:
-        return ESIndexException(bytes(e))
+        raise ESConnectionProblem(str(e))
 
     if response.status_code not in (200, 201):
         raise ESIndexException(response.content)
@@ -78,7 +83,7 @@ def get_aggreagation(*keys):
             data=json.dumps(query)
         )
     except Exception as e:
-        return ESIndexException(bytes(e))
+        raise ESConnectionProblem(str(e))
 
     if response.status_code not in (200, 201):
         raise ESIndexException(response.content)
