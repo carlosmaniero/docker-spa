@@ -16,14 +16,16 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.routers import DefaultRouter
-from vehicles import views
+from vehicles import views as vehicles_views
+from indexer import views as index_views
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
-router.register(r'manufacturer', views.ManufacturerViewSet)
-router.register(r'vehicles', views.VehicleViewSet)
+router.register(r'manufacturer', vehicles_views.ManufacturerViewSet)
+router.register(r'vehicles', vehicles_views.VehicleViewSet)
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),
+    url(r'^api/index/filters/', index_views.filters),
     url(r'^admin/', admin.site.urls),
 ]

@@ -12,6 +12,7 @@ rest_app:
     links:
         - postgres_host
         - redis_host
+        - elasticsearch
         - elasticsearch_test
     env_file:
       - ./docker-base.env
