@@ -1,6 +1,8 @@
 # Docker SPA
 
 [![Build Status](https://travis-ci.org/carlosmaniero/docker-spa.svg?branch=master)](https://travis-ci.org/carlosmaniero/docker-spa)
+[![Coverage Status](https://coveralls.io/repos/github/carlosmaniero/docker-spa/badge.svg?branch=master)](https://coveralls.io/github/carlosmaniero/docker-spa?branch=master)
+
 
 Exemplo simples de utilização de docker com SPA (Single Page Application).
 
