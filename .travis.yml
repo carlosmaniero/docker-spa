@@ -21,5 +21,5 @@ script:
   - docker-compose build redis_host
   - docker-compose stop
   - docker-compose run rest_app coverage run --source='.' manage.py test
-  - cp rest_app/.coverage .
+  - cd rest_app/
   - coveralls
