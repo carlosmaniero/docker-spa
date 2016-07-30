@@ -11,13 +11,13 @@ env:
   ELASTICSEARCH_HOST_TEST: http://127.0.0.1:9200
 
 before_install:
-  - sudo pip install coveralls
+  - sudo pip3 install coveralls
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
   - docker-compose up elasticsearch_test &
-  - sudo pip install -r rest_app/requirements.txt
+  - sudo pip3 install -r rest_app/requirements.txt
 
 script:
   - cd rest_app
