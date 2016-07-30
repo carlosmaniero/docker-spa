@@ -14,10 +14,10 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
   - docker-compose up elasticsearch_test &
+  - pip install -r rest_app/requirements.txt
 
 script:
   - cd rest_app
-  - pip install -r requirements.txt
   - coverage run --source='.' manage.py test
   - coverage report
   - coveralls
