@@ -96,7 +96,15 @@ def search(query, **filters):
 
     for key, value in filters.items():
         if value:
-            es_filters.append({"term": {key: value.lower()}})
+            if isinstance(value, dict):
+                es_filters.append({"range": {
+                    key: {
+                        "gte": value.get('min', -9999999999999999999),
+                        "lte": value.get('max', 9999999999999999999),
+                    }
+                }})
+            else:
+                es_filters.append({"term": {key: value.lower()}})
 
     if es_filters:
         es_filters = {
