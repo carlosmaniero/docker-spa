@@ -27,5 +27,6 @@ router.register(r'vehicles', vehicles_views.VehicleViewSet)
 urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^api/index/filters/', index_views.filters),
+    url(r'^api/index/search/', index_views.search),
     url(r'^admin/', admin.site.urls),
 ]

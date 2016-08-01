@@ -1,0 +1,72 @@
+<form class="well">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label>Modelo: </label>
+            <input type="text" class="form-control" ng-model="vehicle.model_name" required>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="manufacturer-name">Montadora {{vehicle.manufacturer}}: </label>
+            <select class="form-control" ng-model="vehicle.manufacturer" required>
+                <option
+                    ng-repeat="manufacturer in manufacturers"
+                    ng-value="manufacturer.id"
+                    ng-selected="manufacturer.id == vehicle.manufacturer"
+                    >
+                    {{manufacturer.name}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="manufacturer-name">Tipo: </label>
+            <select class="form-control" ng-model="vehicle.category" required>
+                <option value="carro">Carro</option>
+                <option value="moto">Moto</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="manufacturer-name">Motor: </label>
+            <input type="text" class="form-control" ng-model="vehicle.engine" required>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="manufacturer-name">Cor: </label>
+            <select class="form-control" ng-model="vehicle.color" required>
+                <option value="preto">Preto</option>
+                <option value="azul">Azul</option>
+                <option value="prata">Prata</option>
+                <option value="vermelho">Vermelho</option>
+                <option value="verde">Verde</option>
+                <option value="outro">Outro</option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="manufacturer-name">Kilometragem: </label>
+            <input type="number" class="form-control" ng-model="vehicle.kms" required>
+        </div>
+    </div>
+    <input type="submit" value="Salvar" class="btn btn-primary" ng-click="save()">
+    <button type="button" ng-show="vehicle.id" class="btn btn-default" ng-click="reload()">Voltar</button>
+</form>
+
+<table class="table">
+    <tr>
+        <th>Modelo</th>
+        <th>Cor</th>
+        <th>Motor</th>
+        <th class="col-md-1">Ações</th>
+    </tr>
+    <tr ng-repeat="item in list">
+        <td>{{ item.model_name }}</td>
+        <td>{{ item.color }}</td>
+        <td>{{ item.engine }}</td>
+        <td>
+            <a ng-click="edit(item)" href="">
+                <i class="fa fa-pencil"></i>
+            </a>
+            <a ng-click="delete(item)" href="">
+                <i class="fa fa-trash text-danger"></i>
+            </a>
+        </td>
+    </tr>
+</table>

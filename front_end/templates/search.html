@@ -1,0 +1,81 @@
+<form class="well">
+    <div class="row">
+        <div class="col-md-10">
+            <input type="text" class="form-control" ng-model="query" placeholder="Buscar veículo">
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-primary btn-block" ng-click="search()">
+                <i class="fa fa-search"></i>
+                Buscar
+            </button>
+        </div>
+    </div>
+    <hr>
+    <h4>Filtros: </h4>
+    <div class="row">
+        <div class="col-md-2">
+            <select ng-model="query_filters.manufacturer" class="form-control col-md-2" name="">
+                <option value="">Montadora</option>
+                <option ng-value="manufacturer.key" ng-repeat="manufacturer in filters.manufacturer">
+                    {{manufacturer.key.toUpperCase()}}
+                </option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select ng-model="query_filters.color" class="form-control col-md-2" name="">
+                <option value="">Cor</option>
+                <option ng-value="color.key" ng-repeat="color in filters.color">
+                    {{color.key.toUpperCase()}}
+                </option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select ng-model="query_filters.engine" class="form-control col-md-2" name="">
+                <option value="">Motor</option>
+                <option ng-value="engine.key" ng-repeat="engine in filters.engine">
+                    {{engine.key.toUpperCase()}}
+                </option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select ng-model="query_filters.category" class="form-control col-md-2" name="">
+                <option value="">Tipo</option>
+                <option ng-value="category.key" ng-repeat="category in filters.category">
+                    {{category.key.toUpperCase()}}
+                </option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                <div class="input-group">
+                    <div class="input-group-addon">KMs</div>
+                    <input type="text" class="form-control" placeholder="Mínimo">
+                    <div class="input-group-addon">-</div>
+                    <input type="text" class="form-control" placeholder="Máximo">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-info">
+        <strong>Dica: </strong>
+        Você pode buscar por qualquer coisa na busca.
+        Caso você digite: <i>"Chevrolet Monza vermelho V8"</i>.
+        A busca se comportará da seguinte forma:
+        <ul>
+            <li>Procurará todos os modelos que se enquadre na pequisa.</li>
+            <li>Priorizará os veículos em que a montadora se enquadre na pesquisa</li>
+            <li>Priorizará por cor e motor</li>
+        </ul>
+    </div>
+</form>
+
+<table class="table">
+    <tr ng-repeat="result in results.hits.hits">
+        <td>{{ result._source.model_name }}</td>
+        <td>{{ result._source.manufacturer.name }}</td>
+        <td>{{ result._source.color }}</td>
+        <td>{{ result._source.engine }}</td>
+        <td>{{ result._source.kms }}</td>
+    </tr>
+</table>

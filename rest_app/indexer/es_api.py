@@ -89,3 +89,72 @@ def get_aggreagation(*keys):
         raise ESIndexException(response.content)
 
     return json.loads(response.content.decode())
+
+
+def search(query, **filters):
+    es_filters = []
+
+    for key, value in filters.items():
+        if value:
+            es_filters.append({"term": {key: value.lower()}})
+
+    if es_filters:
+        es_filters = {
+            "bool": {
+                "must": es_filters
+            }
+        }
+
+    query = {"query": {
+            "filtered": {
+                "query": {
+                    "function_score": {
+                        "query": {
+                            "match": {
+                                "model_name": query
+                            }
+                        },
+                        "functions": [{
+                            "filter": {
+                                "match": {
+                                    "engine": query
+                                }
+                            },
+                            "weight": 10
+                        }, {
+                            "filter": {
+                                "match": {
+                                    "color": query
+                                }
+                            },
+                            "weight": 10
+                        }, {
+                            "filter": {
+                                "match": {
+                                    "manufacturer.name": query
+                                }
+                            },
+                            "weight": 100
+                        }],
+                        "score_mode": "multiply"
+                    }
+                },
+                "filter": es_filters
+            }
+        }
+    }
+
+    # raise Exception(query)
+
+    try:
+        response = requests.get(
+            VEHICLE_URL + '_search',
+            data=json.dumps(query)
+        )
+    except Exception as e:
+        raise ESConnectionProblem(str(e))
+
+    if response.status_code not in (200, 201):
+        raise ESIndexException(response.content)
+
+    return json.loads(response.content.decode())

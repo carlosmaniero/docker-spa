@@ -1,2 +1,5 @@
 __pycache__/
 .coverage
+front_end/.sass-cache
+front_end/bower_components
+front_end/node_modules

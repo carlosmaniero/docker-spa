@@ -1,0 +1,26 @@
+<form class="well">
+    <div class="form-group">
+        <label for="manufacturer-name">Nome do Fabricante: </label>
+        <input type="text" class="form-control" id="manufacturer-name" ng-model="manufacturer.name">
+    </div>
+    <input type="submit" value="Salvar" class="btn btn-primary" ng-click="save()">
+    <button type="button" ng-show="manufacturer.id" class="btn btn-default" ng-click="reload()">Voltar</button>
+</form>
+
+<table class="table">
+    <tr>
+        <th>Montadora</th>
+        <th class="col-md-1">Ações</th>
+    </tr>
+    <tr ng-repeat="item in list">
+        <td>{{ item.name }}</td>
+        <td>
+            <a ng-click="edit(item)" href="">
+                <i class="fa fa-pencil"></i>
+            </a>
+            <a ng-click="delete(item)" href="">
+                <i class="fa fa-trash text-danger"></i>
+            </a>
+        </td>
+    </tr>
+</table>

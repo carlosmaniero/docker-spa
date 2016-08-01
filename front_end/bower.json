@@ -1,0 +1,21 @@
+{
+  "name": "docker-spa",
+  "description": "",
+  "main": "gulpfile.js",
+  "authors": [
+    "Carlos Maniero <carlosmaniero@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/carlosmaniero/docker-spa",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "bootstrap-sass-official#^3.3.7",
+    "font-awesome": "fontawesome#^4.6.3"
+  }
+}

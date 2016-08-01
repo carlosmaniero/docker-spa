@@ -79,6 +79,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'rest_app.wsgi.application'
 
+APPEND_SLASH = True
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
