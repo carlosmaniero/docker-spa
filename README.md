@@ -12,9 +12,16 @@ Dentro da pasta do projeto execute o build que irá baixar as imagens e as deped
 
     $ docker-compose build
 
+Para popular o banco de dados execute:
+
+    $ docker-compose run rest_app python3 manage.py loaddata initial_data
+
+**PS**: Me desculpe, mas eu não manjo nada de carro.
+
 Para iniciar a aplicação:
 
     $ docker-compose up
+
 
 ### Escalando a aplicação
 
@@ -33,6 +40,8 @@ Só acessar seu [http://localhost/](http://localhost/).
 
 
 # Testes
+
+É bem simples clique no ícone do coveralls acima! Se quiser rodar na unha, segue os passos:
 
 Para executar os testes utilize o seguinte comando:
 
