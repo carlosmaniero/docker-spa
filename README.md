@@ -34,7 +34,7 @@ quantidade de máquinas de aplicação e coloca no balanceador <3
 
 ## E agora? Como eu faço pra ver isso no navegador?
 
-Só acessar seu [http://localhost/](http://localhost/).
+Só acessar seu [http://localhost:8888/](http://localhost:8888/).
 
 ![Magic](http://www.reactiongifs.com/r/mgc.gif)
 
