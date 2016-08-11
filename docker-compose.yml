@@ -1,7 +1,7 @@
 nginx:
     build: ./nginx
     ports:
-        - "80:80"
+        - "8888:80"
     links:
         - load_balencer
     volumes:
